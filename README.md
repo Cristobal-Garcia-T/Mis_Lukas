@@ -1,5 +1,15 @@
 # Mis_Lukas
 
-Diseño y desarrollo de la plataforma de gestión financiera personal MisLukas en el contexto de proyecto de título para obtener el grado de Ingeniería en Computación e Informática.
+Aplicación de escritorio multiplataforma para la gestión y análisis de finanzas domésticas.  
+Permite registrar ingresos y gastos, crear presupuestos mensuales, y visualizar gráficos e informes para tomar mejores decisiones financieras.
 
-Hasta que el proyecto no sea presentado y oficialmente lanzado cómo plataforma open source este repositorio no está abierto intervención externa.
+---
+
+## Características principales
+- Registro y categorización de ingresos y gastos.
+- Creación y seguimiento de presupuestos mensuales.
+- Visualización de gráficos y tablas interactivas.
+- Análisis de deudas y créditos (versión futura).
+- Interfaz intuitiva y orientada a usuarios sin conocimientos técnicos.
+
+---
