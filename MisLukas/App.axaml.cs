@@ -6,7 +6,6 @@ using System.Linq;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using MisLukas.Models;
-using MisLukas.Services;
 using MisLukas.ViewModels;
 using MisLukas.Views;
 
@@ -31,9 +30,11 @@ public partial class App : Application
 
         // ViewModels
         services.AddTransient<MainWindowViewModel>();
+        services.AddTransient<AccountViewModel>();
+        services.AddTransient<BalanceViewModel>();
 
         Services = services.BuildServiceProvider();
-        DbInitializer.Initialize();
+        //DbInitializer.Initialize();
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
@@ -46,7 +47,7 @@ public partial class App : Application
             };
             desktop.Exit += (sender, e) =>
             {
-                DbInitializer.Delete();
+                //DbInitializer.Delete();
             };
 
         }

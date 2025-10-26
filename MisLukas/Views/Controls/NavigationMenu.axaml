@@ -1,0 +1,42 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:MisLukas.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MisLukas.Views.NavigationMenu"
+             x:DataType="viewModels:MainWindowViewModel">
+    <Design.DataContext>
+        <viewModels:MainWindowViewModel/>
+    </Design.DataContext>
+    
+    <Border Background="#2C3E50" Padding="20">
+        <DockPanel LastChildFill="True">
+            
+            <StackPanel DockPanel.Dock="Top" Margin="0 0 0 20">
+                <TextBlock Text="FinanzasApp"
+                           Foreground="White"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+            
+            <StackPanel DockPanel.Dock="Bottom" Spacing="10">
+                <Button Content="Perfil" HorizontalAlignment="Stretch"/>
+                <Button Content="Configuración" HorizontalAlignment="Stretch"/>
+                <Button Content="Cambiar usuario" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+            
+            <StackPanel Spacing="10">
+                <Button Content="Cuentas" HorizontalAlignment="Stretch" Command="{Binding NavigateToAccountCommand}"/>
+                <Button Content="Balance General" HorizontalAlignment="Stretch" Command="{Binding NavigateToBalanceCommand}"/>
+                <Button Content="Gastos" HorizontalAlignment="Stretch"/>
+                <Button Content="Ingresos" HorizontalAlignment="Stretch"/>
+                <Button Content="Deudas" HorizontalAlignment="Stretch"/>
+                <Button Content="Presupuestos" HorizontalAlignment="Stretch" />
+            </StackPanel>
+
+        </DockPanel>
+    </Border>
+    
+</UserControl>
