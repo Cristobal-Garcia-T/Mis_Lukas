@@ -6,6 +6,7 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using MisLukas.Models;
+using MisLukas.Services.Navigation;
 using MisLukas.Services.Perfil;
 using MisLukas.Services.UserContext;
 using MisLukas.ViewModels;
@@ -31,6 +32,7 @@ public partial class App : Application
         
         // Services
         services.AddSingleton<IUserContextService, UserContextService>();
+        services.AddSingleton<INavigationService, NavigationService>();
         services.AddTransient<IUsuarioService, UsuarioService>();
 
         // ViewModels
