@@ -22,18 +22,18 @@
             </StackPanel>
             
             <StackPanel DockPanel.Dock="Bottom" Spacing="10">
-                <Button Content="Perfil" HorizontalAlignment="Stretch"/>
-                <Button Content="Configuración" HorizontalAlignment="Stretch"/>
-                <Button Content="Cambiar usuario" HorizontalAlignment="Stretch"/>
+                <Button Content="Perfil" HorizontalAlignment="Stretch" Command="{Binding NavigateToPerfilCommand}"/>
+                <Button Content="Configuración" HorizontalAlignment="Stretch" Command="{Binding NavigateToConfiguracionCommand}"/>
+                <Button Content="Cambiar usuario" HorizontalAlignment="Stretch" Command="{Binding NavigateToChangeCurrentUserCommand}"/>
             </StackPanel>
             
             <StackPanel Spacing="10">
-                <Button Content="Cuentas" HorizontalAlignment="Stretch" Command="{Binding NavigateToAccountCommand}"/>
+                <Button Content="Cuentas" HorizontalAlignment="Stretch" Command="{Binding NavigateToCuentasCommand}"/>
                 <Button Content="Balance General" HorizontalAlignment="Stretch" Command="{Binding NavigateToBalanceCommand}"/>
-                <Button Content="Gastos" HorizontalAlignment="Stretch"/>
-                <Button Content="Ingresos" HorizontalAlignment="Stretch"/>
-                <Button Content="Deudas" HorizontalAlignment="Stretch"/>
-                <Button Content="Presupuestos" HorizontalAlignment="Stretch" />
+                <Button Content="Gastos" HorizontalAlignment="Stretch" Command="{Binding NavigateToGastosCommand}"/>
+                <Button Content="Ingresos" HorizontalAlignment="Stretch" Command="{Binding NavigateToIngresosCommand}"/>
+                <Button Content="Deudas" HorizontalAlignment="Stretch" Command="{Binding NavigateToDeudasCommand}"/>
+                <Button Content="Presupuestos" HorizontalAlignment="Stretch" Command="{Binding NavigateToPresupuestosCommand}" />
             </StackPanel>
 
         </DockPanel>
