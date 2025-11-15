@@ -11,11 +11,8 @@ public class UserContextService : IUserContextService
         get => _currentUser;
         set
         {
-            if (value == null)
-                throw new ArgumentNullException(nameof(value), "El usuario activo no puede ser null.");
-            
             _currentUser = value;
-            ProfileChanged?.Invoke(_currentUser);
+            ProfileChanged?.Invoke(_currentUser!);
         }
     }
     

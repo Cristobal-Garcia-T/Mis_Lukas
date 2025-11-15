@@ -4,11 +4,11 @@ using MisLukas.ViewModels;
 
 namespace MisLukas.Views;
 
-public partial class NavigationMenu : UserControl
+public partial class LoginView : UserControl
 {
-    public NavigationMenu()
+    public LoginView()
     {
-        DataContext = App.Services.GetRequiredService<NavigationMenuViewModel>();
+        DataContext = App.Services.GetRequiredService<LoginViewModel>();
         InitializeComponent();
     }
 }

@@ -6,12 +6,12 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using MisLukas.Models;
+using MisLukas.Services;
 using MisLukas.Services.Navigation;
-using MisLukas.Services.Perfil;
 using MisLukas.Services.UserContext;
+using MisLukas.Services.UsuariosService;
 using MisLukas.ViewModels;
 using MisLukas.Views;
-using MisLukas.Views.Modals;
 
 namespace MisLukas;
 
@@ -36,46 +36,25 @@ public partial class App : Application
         services.AddTransient<IUsuarioService, UsuarioService>();
 
         // ViewModels
+        services.AddTransient<NavigationMenuViewModel>();
         services.AddTransient<MainWindowViewModel>();
         services.AddTransient<LoginViewModel>();
         services.AddTransient<AccountViewModel>();
         services.AddTransient<BalanceViewModel>();
+        services.AddTransient<NewUserViewModel>();
 
         Services = services.BuildServiceProvider();
-        //DbInitializer.Initialize();
-
-        var userContex = Services.GetRequiredService<IUserContextService>();
-
+        DbInitializer.Initialize();
+        
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
             // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
             DisableAvaloniaDataAnnotationValidation();
             
-            
             desktop.MainWindow = new MainWindow
             {
                 DataContext = Services.GetRequiredService<MainWindowViewModel>()
-            };
-
-            desktop.MainWindow.Opened += async (sender, e) =>
-            {
-                if (userContex.CurrentUser == null) {
-                    var loginWindow = new LoginView();
-                    var result = loginWindow.ShowDialog<Usuario?>(desktop.MainWindow);
-
-                    await result.ContinueWith(task =>
-                    {
-                        if (task.Result == null)
-                            desktop.Shutdown();
-                    });
-                }
-            };
-            
-            
-            desktop.Exit += (sender, e) =>
-            {
-                //DbInitializer.Delete();
             };
 
         }

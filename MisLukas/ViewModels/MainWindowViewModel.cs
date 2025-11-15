@@ -1,7 +1,7 @@
 ﻿using System;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
+using MisLukas.Services.Navigation;
 
 namespace MisLukas.ViewModels;
 
@@ -9,58 +9,18 @@ public partial class MainWindowViewModel : ViewModelBase
 {
     [ObservableProperty]
     private ViewModelBase _currentPage;
+
+    private readonly INavigationService _navigationService;
     
-    public MainWindowViewModel()
+    public MainWindowViewModel(INavigationService navigationService)
     {
-        _currentPage = App.Services.GetRequiredService<AccountViewModel>();
-    }
-    [RelayCommand]
-    public void NavigateToCuentas()
-    {
-        CurrentPage = App.Services.GetRequiredService<AccountViewModel>();
-        Console.WriteLine($"Navigate to {CurrentPage.GetType().Name}");
-    }
-    [RelayCommand]
-    public void NavigateToBalance()
-    {
-        CurrentPage = App.Services.GetRequiredService<BalanceViewModel>();
-        Console.WriteLine($"Navigate to {CurrentPage.GetType().Name}");
+        _navigationService = navigationService;
+        _navigationService.PageChanged += OnNavigation;
+        _currentPage = App.Services.GetRequiredService<LoginViewModel>();
     }
 
-    [RelayCommand]
-    public void NavigateToGastos()
+    private void OnNavigation(Type vmType)
     {
-        throw new NotImplementedException();
-    }
-    [RelayCommand]
-    public void NavigateToIngresos()
-    {
-        throw new NotImplementedException();
-    }
-    [RelayCommand]
-    public void NavigateToDeudas()
-    {
-        throw new NotImplementedException();
-    }
-    [RelayCommand]
-    public void NavigateToPresupuestos()
-    {
-        throw new NotImplementedException();
-    }
-
-    [RelayCommand]
-    public void NavigateToPerfil()
-    {
-        throw new NotImplementedException();
-    }
-    [RelayCommand]
-    public void NavigateToConfiguracion()
-    {
-        throw new NotImplementedException();
-    }
-    [RelayCommand]
-    public void NavigateToChangeCurrentUser()
-    {
-        throw new NotImplementedException();
+        CurrentPage = (ViewModelBase)App.Services.GetRequiredService(vmType);
     }
 }

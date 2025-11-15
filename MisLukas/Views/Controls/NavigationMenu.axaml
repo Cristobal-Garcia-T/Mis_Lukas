@@ -5,12 +5,12 @@
              xmlns:viewModels="clr-namespace:MisLukas.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MisLukas.Views.NavigationMenu"
-             x:DataType="viewModels:MainWindowViewModel">
+             x:DataType="viewModels:NavigationMenuViewModel">
     <Design.DataContext>
-        <viewModels:MainWindowViewModel/>
+        <viewModels:NavigationMenuViewModel/>
     </Design.DataContext>
     
-    <Border Background="#2C3E50" Padding="20">
+    <Border Background="#2C3E50" Padding="20" >
         <DockPanel LastChildFill="True">
             
             <StackPanel DockPanel.Dock="Top" Margin="0 0 0 20">

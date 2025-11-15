@@ -27,4 +27,8 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.10" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.10" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Views\Modals\" />
+    </ItemGroup>
 </Project>

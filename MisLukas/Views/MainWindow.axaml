@@ -15,11 +15,11 @@
     </Design.DataContext>
     
     <Grid ColumnDefinitions="0.3*,*">
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="0" Background="#2C3E50">
             <cc:NavigationMenu/>
         </Grid>
         <Grid Grid.Column="1">
-            <ContentControl  Margin="30" Content="{Binding CurrentPage}"/>
+            <ContentControl Background="#161f29" Content="{Binding CurrentPage}"/>
         </Grid>
     </Grid>
 

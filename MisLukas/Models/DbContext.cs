@@ -17,4 +17,15 @@ public class SqLiteContext : DbContext
     {
         optionsBuilder.UseSqlite("Data Source=MisLukas.db");
     }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        // Definir índice único en Username
+        modelBuilder.Entity<Usuario>()
+            .HasIndex(u => u.Nombre)
+            .IsUnique();
+    }
+
 }

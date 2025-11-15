@@ -1,15 +1,22 @@
 ﻿using System;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MisLukas.Models;
+using MisLukas.Services.Navigation;
 using MisLukas.Services.UserContext;
 
 namespace MisLukas.ViewModels;
 
 public partial class LoginViewModel : ViewModelBase
 {
-    public string Text { get; set; }
     private readonly IUserContextService _userContext;
-    private readonly Usuario _someUser = new Usuario
+    private readonly INavigationService _navigationService;
+    [ObservableProperty]
+    private string? _username;
+    [ObservableProperty]
+    private string? _password;
+
+    private Usuario _someUser = new Usuario
     {
         IdUsuario = 0,
         Nombre = "Cristobal",
@@ -21,18 +28,23 @@ public partial class LoginViewModel : ViewModelBase
         Categorias = []
     };
 
-    public LoginViewModel(IUserContextService userContext)
+    public LoginViewModel(IUserContextService userContext, INavigationService navigationService)
     {
+        _navigationService = navigationService;
         _userContext = userContext;
-        Text = "Seleccionar Usuario";
     }
 
     [RelayCommand]
     private void Login()
     {
+        _someUser.Nombre = Username!;
+        _someUser.PasswordHash = Password!;
         _userContext.CurrentUser = _someUser;
-        RequestClose?.Invoke(_userContext.CurrentUser);
     }
-    
-    public event Action<Usuario?>? RequestClose; 
+
+    [RelayCommand]
+    private void Register()
+    {
+        _navigationService.NavigateTo<NewUserViewModel>();
+    }
 }
