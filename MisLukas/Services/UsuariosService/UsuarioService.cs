@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using MisLukas.Models;
+using MisLukas.Services.UserContext;
 
 namespace MisLukas.Services.UsuariosService;
 
@@ -61,6 +63,16 @@ public class UsuarioService : IUsuarioService
     public async Task<bool> ExisteUsuarioAsync(string nombre)
     {
         return await _db.Usuarios.AnyAsync(u => u.Nombre == nombre);
+    }
+
+    public async Task<bool> IniciarSesionAsync(string nombre, string password)
+    {
+        var usuarioEntrante = await ObtenerPorNombreAsync(nombre);
+        if (usuarioEntrante == null) return false;
+        if (usuarioEntrante.PasswordHash != password) return false;
+        App.Services.GetRequiredService<IUserContextService>().CurrentUser = usuarioEntrante;
+        return true;
+
     }
 }
 

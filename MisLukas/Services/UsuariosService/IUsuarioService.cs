@@ -12,4 +12,5 @@ public interface IUsuarioService
     Task<bool> ActualizarAsync(string nombre, string password);
     Task<bool> EliminarAsync(string nombre);
     Task<bool> ExisteUsuarioAsync(string nombre);
+    Task<bool> IniciarSesionAsync(string nombre, string password);
 }

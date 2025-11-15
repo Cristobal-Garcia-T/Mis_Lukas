@@ -1,9 +1,9 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MisLukas.Models;
 using MisLukas.Services.Navigation;
 using MisLukas.Services.UserContext;
+using MisLukas.Services.UsuariosService;
 
 namespace MisLukas.ViewModels;
 
@@ -11,35 +11,37 @@ public partial class LoginViewModel : ViewModelBase
 {
     private readonly IUserContextService _userContext;
     private readonly INavigationService _navigationService;
-    [ObservableProperty]
-    private string? _username;
-    [ObservableProperty]
-    private string? _password;
+    private readonly IUsuarioService _usuarioService;
+    [ObservableProperty] private string? _username;
+    [ObservableProperty] private string? _password;
+    [ObservableProperty] private bool _loginSucces;
+    [ObservableProperty] private bool _showWarningLabel;
+    [ObservableProperty] private string _warningLabel = "";
 
-    private Usuario _someUser = new Usuario
-    {
-        IdUsuario = 0,
-        Nombre = "Cristobal",
-        PasswordHash = "null",
-        FechaRegistro = DateTime.Now,
-        Cuentas = [],
-        Presupuestos = [],
-        Deudas = [],
-        Categorias = []
-    };
-
-    public LoginViewModel(IUserContextService userContext, INavigationService navigationService)
+    public LoginViewModel(IUserContextService userContext, INavigationService navigationService, IUsuarioService usuarioService)
     {
         _navigationService = navigationService;
         _userContext = userContext;
+        _usuarioService = usuarioService;
     }
 
     [RelayCommand]
-    private void Login()
+    private async Task Login()
     {
-        _someUser.Nombre = Username!;
-        _someUser.PasswordHash = Password!;
-        _userContext.CurrentUser = _someUser;
+        if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password))
+        {
+            ShowWarningLabel = true;
+            WarningLabel = "Campos incompletos";
+            return;
+        }
+
+        if (await _usuarioService.IniciarSesionAsync(Username, Password))
+            _navigationService.NavigateTo<BalanceViewModel>();
+        else
+        {
+            ShowWarningLabel = true;
+            WarningLabel = "Nombre de usuario o contraseña incorrectos";
+        }
     }
 
     [RelayCommand]

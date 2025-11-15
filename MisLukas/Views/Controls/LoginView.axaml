@@ -29,6 +29,7 @@
                 <TextBox Text="{Binding Password}"
                          Watermark="Contraseña"
                          PasswordChar="*"/>
+                <Label IsVisible="{Binding ShowWarningLabel}" Content="{Binding WarningLabel}"/>
 
                 <Button Content="Iniciar Sesión"
                         Command="{Binding LoginCommand}"
